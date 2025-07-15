@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>幻の部屋</title>
+    <meta name="description" content="幻の部屋" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- favicon/web-clip-icon -->
+    <link rel="icon" href="favicon.ico" type="image/ico" />
+    <link rel="icon" href="favicon.png" type="image/png" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="webclip.png" />
+
+    <!-- ogp共有時の表示 -->
+    <meta property="og:site_name" content="幻の部屋" />
+    <meta property="og:url" content="http://127.0.0.1:5500/src/index.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="幻の部屋" />
+    <meta property="og:description" content="幻の部屋" />
+    <meta property="og:image" content="URL" />
+    <meta property="og:locale" content="ja_JP" />
+
+    <meta property="fb:app_id" content="AppID" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@twitter_id" />
+    <meta name="twitter:description" content="幻の部屋" />
+    <meta name="twitter:image:src" content="URL" />
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- js -->
+    <script src="js/main.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+
+    <!-- audio -->
+    <audio id="break-heart" src="audio/break-heart.mp3" preload="auto"></audio>
+    <audio id="don-sound" src="audio/don.mp3" preload="auto"></audio>
+    <audio id="buon" src="audio/buon.mp3" preload="auto"></audio>
+  </head>
+  <header class="l_header js_header">
+    <h1 class="l_header_logo">
+      <a href="index.html" class="l_header_link">Mystery</a>
+    </h1>
+    <nav class="l_header-nav js_nav">
+      <ul class="l_header-nav_list">
+        <li class="l_header-nav_item">
+          <a href="index.html" class="l_header-nav_link">はじめから</a>
+        </li>
+        <li class="l_header-nav_item">
+          <a href="room.html" class="l_header-nav_link">部屋に入ってから</a>
+        </li>
+        <li class="l_header-nav_item">
+          <button class="l_header-nav_link" onclick="hint()">ヒント</button>
+        </li>
+        <!-- <li class="l_header-nav_item">
+            <a href="clear.html" class="l_header-nav_link"
+              >元の世界へ戻った後</a
+            >
+          </li> -->
+      </ul>
+    </nav>
+    <button class="m_hamburger js_hamburger">
+      <span class="m_hamburger-bar"></span>
+      <span class="m_hamburger-bar"></span>
+      <span class="m_hamburger-bar"></span>
+    </button>
+  </header>
+  <body class="js_body">
+    <div class="start">
+      <div class="l_contents l_container-sm">
+        <p>今日は誕生日で１人旅！少しお高いホテルに泊まりに来た。</p>
+        <p>「楽しみだな！！」</p>
+      </div>
+      <button class="m_btn" onclick="start()">受付嬢に話しかける</button>
+    </div>
+    <!-- 黒い全画面レイヤー -->
+    <div id="intro-overlay"></div>
+    <div id="fadeout-overlay"></div>
+    <main class="top_main">
+      <section class="l_section js_section" id="checkin">
+        <div class="l_contents l_container-sm">
+          <h2 class="m_title">チェックインカウンター</h2>
+          <p>受付嬢「予約時に設定された暗証コードをご入力ください」</p>
+          <p>(暗証コード、確かメモしたはずだ。)</p>
+          <div class="top_ch-memo">
+            <p class="top_ch-memo_p">Diamond Hotel：暗証コード</p>
+            <p class="top_ch-memo_p">18 15 15 13 /26</p>
+          </div>
+          <input
+            type="text"
+            id="answerCh"
+            class="m_answer"
+            placeholder="暗証コードを入力"
+          />
+          <br />
+          <button class="m_btn" onclick="checkAnswer('Ch')">
+            チェックイン
+          </button>
+          <p id="resultCh"></p>
+        </div>
+      </section>
+      <section id="elevator" class="l_section js_section">
+        <div class="l_contents l_container-sm">
+          <h2 class="m_title">エレベーター</h2>
+          <p>エレベーターに乗り、ボタンを押した。</p>
+          <p>が反応しない。</p>
+          <p>「おかしいな、なんでだろう、、、？」</p>
+          <!-- ボタン群 -->
+          <div id="elevatorButtons" class="top_el-btns"></div>
+          <!-- エレベーターボタンを生成 -->
+          <script>
+            for (let i = 20; i >= 1; i--) {
+              const btn = document.createElement("button");
+              btn.textContent = i + "階";
+              btn.disabled = true;
+              btn.classList.add("top_el-btn");
+              btn.id = "elBtn" + i;
+              btn.onclick = () => {
+                // 選ばれた階で次のシーンに遷移（今回は仮に“door”セクションへ）
+                if (btn.id === "elBtn12") {
+                  checkAnswer("El");
+                } else {
+                  checkAnswer("Eln");
+                }
+              };
+              document.getElementById("elevatorButtons").appendChild(btn);
+            }
+          </script>
+          <!-- カードリーダー -->
+          <div
+            id="reader1"
+            ondragover="event.preventDefault()"
+            ondrop="handleDrop(event, 1)"
+            class="top_el_reader"
+          >
+            scan
+          </div>
+          <!-- カードキー -->
+          <div class="top_el_card-wrapper">
+            <div
+              class="top_el_card js_card is-active"
+              onclick="flipCard()"
+              id="cardFront"
+              draggable="true"
+              ondragstart="handleDragStart(event)"
+            >
+              Diamond Hotel
+              <br />room key
+            </div>
+            <div
+              class="top_el_card js_card"
+              onclick="flipCard()"
+              id="cardBack"
+              draggable="true"
+              ondragstart="handleDragStart(event)"
+            >
+              <p class="js_card_p">
+                部屋番号：1206<br />お部屋の暗証番号は、誕生日です。
+              </p>
+            </div>
+          </div>
+          <p id="resultEl"></p>
+          <!-- ダミーの解答欄 -->
+          <input
+            type="text"
+            id="answerEl"
+            class="m_answer"
+            placeholder="暗証コードを入力"
+            style="display: none"
+          />
+          <p id="resultEln"></p>
+          <input
+            type="text"
+            id="answerEln"
+            class="m_answer"
+            placeholder="暗証コードを入力"
+            style="display: none"
+          />
+        </div>
+      </section>
+      <section id="door" class="l_section js_section">
+        <div class="l_contents l_container-sm l_do">
+          <h2>部屋の前</h2>
+          <p>ここが今日泊まる部屋か</p>
+          <p>ええっと、どうやって入るんだろう</p>
+          <!-- ドア -->
+          <div class="top_do_door">
+            <input
+              type="text"
+              id="answerDo"
+              class="m_answer is-disable"
+              placeholder="****"
+            />
+            <button class="m_btn" onclick="checkAnswer('Do')">解除</button>
+            <!-- カードリーダー -->
+            <div
+              id="reader2"
+              ondragover="event.preventDefault()"
+              ondrop="handleDrop(event, 2)"
+              class="top_el_reader"
+            ></div>
+          </div>
+          <!-- カードキー -->
+          <div class="top_el_card-wrapper">
+            <div
+              class="top_el_card js_card is-active"
+              onclick="flipCard()"
+              id="cardFront"
+              draggable="true"
+              ondragstart="handleDragStart(event)"
+            >
+              Diamond Hotel
+              <br />room key
+            </div>
+            <div
+              class="top_el_card js_card"
+              onclick="flipCard()"
+              id="cardBack"
+              draggable="true"
+              ondragstart="handleDragStart(event)"
+            >
+              <p class="js_card_p">
+                部屋番号：1206<br />お部屋の暗証番号は、誕生日です。
+              </p>
+            </div>
+          </div>
+
+          <p id="resultDo"></p>
+        </div>
+      </section>
+    </main>
+
+    <div class="l_contents l_container-sm">
+      <p>※上下グレーのヘッダー・フッターは、謎解きに使用しません。</p>
+    </div>
+    <footer class="l_footer">
+      <div class="l_footer_box">
+        <nav class="l_footer-nav">
+          <ul class="l_footer-nav_list">
+            <li class="l_footer-nav_item">
+              <a href="index.html" class="l_footer-nav_link">はじめから</a>
+            </li>
+            <li class="l_footer-nav_item">
+              <a href="room.html" class="l_footer-nav_link"
+                >部屋へ入った直後から</a
+              >
+            </li>
+            <li class="l_footer-nav_item">
+              <button class="l_footer-nav_link" onclick="hint()">ヒント</button>
+            </li>
+          </ul>
+        </nav>
+        <div class="l_footer_logo">
+          <a href="index.html" class="l_footer_link">
+            <img
+              src="img/logo.png"
+              alt=""
+              class="l_footer_link-img"
+              width="500"
+              height="500"
+            />
+          </a>
+        </div>
+      </div>
+      <p class="l_footer-copyright">
+        <small class="l_footer-copyright_txt">D-ya</small>
+      </p>
+    </footer>
+  </body>
+</html>
