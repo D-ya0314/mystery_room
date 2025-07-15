@@ -121,6 +121,7 @@ body {
   text-align: center;
   background-color: var(--accent-color);
   color: var(--white-color);
+  width: 100%;
 }
 
 p {
@@ -235,18 +236,11 @@ p {
 }
 
 /* door */
-.l_do {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
 .top_do_door {
   border: solid 3px var(--black-color);
   height: 400px;
   width: 300px;
-  margin-top: 40px;
+  margin: 40px auto 0;
 }
 
 
