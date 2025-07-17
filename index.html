@@ -32,7 +32,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Roboto:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Roboto:wght@400;700&family=Zen+Kurenaido&display=swap"
       rel="stylesheet"
     />
 
@@ -91,9 +91,11 @@
     <main class="top_main">
       <section class="l_section js_section" id="checkin">
         <div class="l_contents l_container-sm">
-          <h2 class="m_title">チェックインカウンター</h2>
-          <p>受付嬢「予約時に設定された暗証コードをご入力ください」</p>
-          <p>(暗証コード、確かメモしたはずだ。)</p>
+          <!-- <h2 class="m_title">チェックインカウンター</h2> -->
+          <div class="m_question_p">
+            <p>受付嬢「予約時に設定された暗証コードをご入力ください」</p>
+            <p>(暗証コード、、、確かメモしたはずだ。)</p>
+          </div>
           <div class="top_ch-memo">
             <p class="top_ch-memo_p">Diamond Hotel：暗証コード</p>
             <p class="top_ch-memo_p">18 15 15 13 /26</p>
@@ -108,44 +110,49 @@
           <button class="m_btn" onclick="checkAnswer('Ch')">
             チェックイン
           </button>
-          <p id="resultCh"></p>
+          <p id="resultCh" class="m_question_p"></p>
         </div>
       </section>
       <section id="elevator" class="l_section js_section">
         <div class="l_contents l_container-sm">
-          <h2 class="m_title">エレベーター</h2>
-          <p>エレベーターに乗り、ボタンを押した。</p>
-          <p>が反応しない。</p>
-          <p>「おかしいな、なんでだろう、、、？」</p>
-          <!-- ボタン群 -->
-          <div id="elevatorButtons" class="top_el-btns"></div>
-          <!-- エレベーターボタンを生成 -->
-          <script>
-            for (let i = 20; i >= 1; i--) {
-              const btn = document.createElement("button");
-              btn.textContent = i + "階";
-              btn.disabled = true;
-              btn.classList.add("top_el-btn");
-              btn.id = "elBtn" + i;
-              btn.onclick = () => {
-                // 選ばれた階で次のシーンに遷移（今回は仮に“door”セクションへ）
-                if (btn.id === "elBtn12") {
-                  checkAnswer("El");
-                } else {
-                  checkAnswer("Eln");
-                }
-              };
-              document.getElementById("elevatorButtons").appendChild(btn);
-            }
-          </script>
-          <!-- カードリーダー -->
-          <div
-            id="reader1"
-            ondragover="event.preventDefault()"
-            ondrop="handleDrop(event, 1)"
-            class="top_el_reader"
-          >
-            scan
+          <!-- <h2 class="m_title">エレベーター</h2> -->
+          <div class="m_question_p">
+            <p>エレベーターに乗り、ボタンを押した。</p>
+            <p>が反応しない。</p>
+            <p>「おかしいな、なんでだろう、、、？」</p>
+          </div>
+          <!-- エレベーターの壁 -->
+          <div class="top_el">
+            <!-- ボタン群 -->
+            <div id="elevatorButtons" class="top_el-btns"></div>
+            <!-- エレベーターボタンを生成 -->
+            <script>
+              for (let i = 20; i >= 1; i--) {
+                const btn = document.createElement("button");
+                btn.textContent = i + "階";
+                btn.disabled = true;
+                btn.classList.add("top_el-btn");
+                btn.id = "elBtn" + i;
+                btn.onclick = () => {
+                  // 選ばれた階で次のシーンに遷移（今回は仮に“door”セクションへ）
+                  if (btn.id === "elBtn12") {
+                    checkAnswer("El");
+                  } else {
+                    checkAnswer("Eln");
+                  }
+                };
+                document.getElementById("elevatorButtons").appendChild(btn);
+              }
+            </script>
+            <!-- カードリーダー -->
+            <div
+              id="reader1"
+              ondragover="event.preventDefault()"
+              ondrop="handleDrop(event, 1)"
+              class="top_el_reader"
+            >
+              scan
+            </div>
           </div>
           <!-- カードキー -->
           <div class="top_el_card-wrapper">
@@ -171,7 +178,7 @@
               </p>
             </div>
           </div>
-          <p id="resultEl"></p>
+          <p id="resultEl" class="m_question_p"></p>
           <!-- ダミーの解答欄 -->
           <input
             type="text"
@@ -180,7 +187,7 @@
             placeholder="暗証コードを入力"
             style="display: none"
           />
-          <p id="resultEln"></p>
+          <p id="resultEln" class="m_question_p"></p>
           <input
             type="text"
             id="answerEln"
@@ -192,9 +199,9 @@
       </section>
       <section id="door" class="l_section js_section">
         <div class="l_contents l_container-sm">
-          <h2 class="m_title">部屋の前</h2>
-          <p>ここが今日泊まる部屋か</p>
-          <p>ええっと、どうやって入るんだろう</p>
+          <!-- <h2 class="m_title">部屋の前</h2> -->
+          <p class="m_question_p">ここが今日泊まる部屋か</p>
+          <p class="m_question_p">ええっと、どうやって入るんだろう</p>
           <!-- ドア -->
           <div class="top_do_door">
             <input
@@ -237,7 +244,7 @@
             </div>
           </div>
 
-          <p id="resultDo"></p>
+          <p id="resultDo" class="m_question_p"></p>
         </div>
       </section>
     </main>
