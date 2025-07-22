@@ -192,7 +192,7 @@ function flipCard() {
 let solvedCount = 0;
 
 const roomQuestions = {
-  room1: "謎①：鏡に映る文字、これはなんだろう？</br><p class='room_q-room1'>「S　I　EI」",
+  room1: "謎①：鏡に映っている文字、これはなんだろう？</br><p class='room_q-room1'>「S　I　EI」",
   room2:
     "謎②：時計があるけど何かおかしいな。何時を指しているんだろう？<div class='room_img-box'><img src='img/clock.png'alt='時計の画像' class='room_img' width='500' height='500'/></div><p>回答形式「〇〇 〇〇」</p>",
   room3:
