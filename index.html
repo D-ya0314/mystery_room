@@ -45,11 +45,27 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 
     <!-- audio -->
-    <audio id="break-heart" src="audio/break-heart.mp3" preload="auto"></audio>
-    <audio id="don-sound" src="audio/don.mp3" preload="auto"></audio>
-    <audio id="buon" src="audio/buon.mp3" preload="auto"></audio>
+    <audio id="open" src="audio/door_open.mp3" preload="auto"></audio>
+    <audio id="hello" src="audio/受付嬢_こんにちは.wav" preload="auto"></audio>
+    <audio
+      id="reserve"
+      src="audio/受付嬢_予約時に設定され.wav"
+      preload="auto"
+    ></audio>
+    <audio
+      id="notCode"
+      src="audio/受付嬢_その暗証コードで.wav"
+      preload="auto"
+    ></audio>
+    <audio
+      id="diner"
+      src="audio/受付嬢_本日の晩御飯ですが.wav"
+      preload="auto"
+    ></audio>
+    <audio id="scan" src="audio/scan.mp3" preload="auto"></audio>
+    <audio id="elevatorSound" src="audio/elevator.mp3" preload="auto"></audio>
   </head>
-  <body class="js_body">
+  <body class="js_body is-active">
     <header class="l_header js_header">
       <h1 class="l_header_logo">
         <a href="index.html" class="l_header_link">Mystery</a>
@@ -59,16 +75,11 @@
           <li class="l_header-nav_item">
             <a href="index.html" class="l_header-nav_link">はじめから</a>
           </li>
-          <li class="l_header-nav_item">
-            <a href="room.html" class="l_header-nav_link">部屋に入ってから</a>
-          </li>
-          <li class="l_header-nav_item">
-            <button class="l_header-nav_link" onclick="hint()">ヒント</button>
-          </li>
           <!-- <li class="l_header-nav_item">
-            <a href="clear.html" class="l_header-nav_link"
-              >元の世界へ戻った後</a
-            >
+            <a href="room.html" class="l_header-nav_link">部屋に入ってから</a>
+          </li> -->
+          <!-- <li class="l_header-nav_item">
+            <button class="l_header-nav_link" onclick="hint()">ヒント</button>
           </li> -->
         </ul>
       </nav>
@@ -83,22 +94,25 @@
         <p>今日は誕生日で１人旅！少しお高いホテルに泊まりに来た。</p>
         <p>「楽しみだな！！」</p>
       </div>
-      <button class="m_btn" onclick="start()">受付嬢に話しかける</button>
+      <button class="m_btn" onclick="start('o')">受付嬢に話しかける</button>
     </div>
     <!-- 黒い全画面レイヤー -->
     <div id="intro-overlay"></div>
     <div id="fadeout-overlay"></div>
     <main class="top_main">
-      <section class="l_section js_section" id="checkin">
+      <section class="l_section js_section is-active" id="checkin">
         <div class="l_contents l_container-sm">
-          <!-- <h2 class="m_title">チェックインカウンター</h2> -->
           <div class="m_question_p">
             <p>受付嬢「予約時に設定された暗証コードをご入力ください」</p>
             <p>(暗証コード、、、確かメモしたはずだ。)</p>
           </div>
           <div class="top_ch-memo">
+            <p class="top_ch-memo_p">メモ</p>
             <p class="top_ch-memo_p">Diamond Hotel：暗証コード</p>
             <p class="top_ch-memo_p">18 15 15 13 /26</p>
+            <br />
+            <p class="top_ch-memo_p">チェックイン 15時~</p>
+            <p class="top_ch-memo_p">チェックアウト 15時まで</p>
           </div>
           <input
             type="text"
@@ -110,12 +124,11 @@
           <button class="m_btn" onclick="checkAnswer('Ch')">
             チェックイン
           </button>
-          <p id="resultCh" class="m_question_p"></p>
+          <p id="resultCh" class="m_question_p">.</p>
         </div>
       </section>
       <section id="elevator" class="l_section js_section">
         <div class="l_contents l_container-sm">
-          <!-- <h2 class="m_title">エレベーター</h2> -->
           <div class="m_question_p">
             <p>エレベーターに乗り、ボタンを押した。</p>
             <p>が反応しない。</p>
@@ -151,7 +164,7 @@
               ondrop="handleDrop(event, 1)"
               class="top_el_reader"
             >
-              scan
+              touch
             </div>
           </div>
           <!-- カードキー -->
@@ -174,11 +187,11 @@
               ondragstart="handleDragStart(event)"
             >
               <p class="js_card_p">
-                部屋番号：1206<br />お部屋の暗証番号は、誕生日です。
+                部屋番号：1206<br />お部屋の暗証番号は、誕生日です。<br /><br />※朝食は7時から9時までにお越しください。
               </p>
             </div>
           </div>
-          <p id="resultEl" class="m_question_p"></p>
+          <p id="resultEl" class="m_question_p">.</p>
           <!-- ダミーの解答欄 -->
           <input
             type="text"
@@ -199,7 +212,6 @@
       </section>
       <section id="door" class="l_section js_section">
         <div class="l_contents l_container-sm">
-          <!-- <h2 class="m_title">部屋の前</h2> -->
           <p class="m_question_p">ここが今日泊まる部屋か</p>
           <p class="m_question_p">ええっと、どうやって入るんだろう</p>
           <!-- ドア -->
@@ -239,12 +251,11 @@
               ondragstart="handleDragStart(event)"
             >
               <p class="js_card_p">
-                部屋番号：1206<br />お部屋の暗証番号は、誕生日です。
+                部屋番号：1206<br />お部屋の暗証番号は、誕生日です。<br /><br />※朝食は7時から9時までにお越しください。
               </p>
             </div>
           </div>
-
-          <p id="resultDo" class="m_question_p"></p>
+          <p id="resultDo" class="m_question_p">.</p>
         </div>
       </section>
     </main>
@@ -259,14 +270,14 @@
             <li class="l_footer-nav_item">
               <a href="index.html" class="l_footer-nav_link">はじめから</a>
             </li>
-            <li class="l_footer-nav_item">
+            <!-- <li class="l_footer-nav_item">
               <a href="room.html" class="l_footer-nav_link"
-                >部屋へ入った直後から</a
+                >部屋に入ってから</a
               >
-            </li>
-            <li class="l_footer-nav_item">
+            </li> -->
+            <!-- <li class="l_footer-nav_item">
               <button class="l_footer-nav_link" onclick="hint()">ヒント</button>
-            </li>
+            </li> -->
           </ul>
         </nav>
         <div class="l_footer_logo">
@@ -281,8 +292,9 @@
           </a>
         </div>
       </div>
+      <p class="l_footer-copyright">受付嬢の声：VOICEBOX(もち子さん(ノーマル))</ｐ>
       <p class="l_footer-copyright">
-        <small class="l_footer-copyright_txt">D-ya</small>
+        <small class="l_footer-copyright_txt">Dの謎べya</small>
       </p>
     </footer>
   </body>

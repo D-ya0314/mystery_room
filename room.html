@@ -32,7 +32,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Roboto:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Roboto:wght@400;700&family=Zen+Kurenaido&display=swap"
       rel="stylesheet"
     />
 
@@ -45,11 +45,10 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 
     <!-- audio -->
-    <audio id="break-heart" src="audio/break-heart.mp3" preload="auto"></audio>
-    <audio id="don-sound" src="audio/don.mp3" preload="auto"></audio>
-    <audio id="buon" src="audio/buon.mp3" preload="auto"></audio>
+    <audio id="lock" src="audio/door_lock.mp3" preload="auto"></audio>
+    <audio id="clear" src="audio/clear.mp3" preload="auto"></audio>
   </head>
-  <body class="js_body">
+  <body class="js_body is-active">
     <header class="l_header js_header">
       <h1 class="l_header_logo">
         <a href="index.html" class="l_header_link">Mystery</a>
@@ -65,11 +64,6 @@
           <li class="l_header-nav_item">
             <button class="l_header-nav_link" onclick="hint()">ヒント</button>
           </li>
-          <!-- <li class="l_header-nav_item">
-            <a href="clear.html" class="l_header-nav_link"
-              >元の世界へ戻った後</a
-            >
-          </li> -->
         </ul>
       </nav>
       <button class="m_hamburger js_hamburger">
@@ -78,19 +72,130 @@
         <span class="m_hamburger-bar"></span>
       </button>
     </header>
-    <div id="fadein-overlay"></div>
     <div id="fadeout-overlay"></div>
-    <section class="l_section">
-      <div class="l_contents l_container-sm">
-        <p>「ふぅ、やっと部屋に着いたよ...」</p>
-        <p>（ｶﾞﾁｬｯ）</p>
-        <p>!?</p>
-        <p>どうやらオートロックらしい。</p>
-        <br /><br /><br />
-        <p>続きはおまちくだせぇ！！🙇</p>
-      </div>
-    </section>
+    <main class="top_main">
+      <section id="room" class="l_section">
+        <div class="start">
+          <div class="l_contents l_container-sm">
+            <p>「ふぅ、やっと部屋に着いたよ...」</p>
+          </div>
+          <button class="m_btn" onclick="start('d')">電気をつける</button>
+        </div>
+        <div id="intro-overlay"></div>
+        <div class="l_contents l_container-sm">
+          <div class="m_question_p">
+            <p class="m_p">（ｶﾞﾁｬｯ）</p>
+            <p class="m_p">!? 鍵が閉まった。</p>
+            <p class="m_p">中は静まり返ったスイートルーム。</p>
+            <p class="m_p">
+              だが、どこかおかしい……家具の配置、異様な静けさ、そして空気の違和感。
+            </p>
+            <p class="m_p">ふと、壁に貼られた1枚のメモに気づく。</p>
+            <p class="m_p">
+              「ここは“幻の部屋”。この部屋の謎を解くことで、本当の部屋にたどり着くだろう」
+            </p>
+            <p class="m_p">
+              ...こんなに豪華な部屋なら、この部屋でいいんだけどな笑
+            </p>
+            <p class="m_p">どれから解こうか？</p>
+          </div>
+          <div class="room_container">
+            <div class="room_img-box">
+              <img
+                src="img/room05.png"
+                alt="部屋の画像"
+                class="room_img"
+                width="896"
+                height="597"
+              />
+            </div>
+            <div class="room_answer-container" id="roomAnswers">
+              <p class="room_answer" id="roomAnswer1"></p>
+              <p class="room_answer" id="roomAnswer2"></p>
+              <p class="room_answer" id="roomAnswer3"></p>
+            </div>
+            <div class="js_hint room_hint-container" id="hints">
+              <div>
+                <button class="m_btn" onclick="openhint('r1')">
+                  受付嬢のセリフ
+                </button>
+                <div class="room_hint" id="hintRoom1">
+                  受付嬢「本日の晩御飯ですが、19時からですので<br />遅刻しないようお願いいたします。」
+                </div>
+              </div>
+              <div>
+                <button class="m_btn" onclick="openhint('r2')">
+                  自分のメモ
+                </button>
+                <div class="room_hint" id="hintRoom2">
+                  <div class="top_ch-memo">
+                    <p class="top_ch-memo_p">メモ</p>
+                    <p class="top_ch-memo_p">Diamond Hotel：暗証コード</p>
+                    <p class="top_ch-memo_p">18 15 15 13 /26</p>
+                    <br />
+                    <p class="top_ch-memo_p">チェックイン 15時~</p>
+                    <p class="top_ch-memo_p">チェックアウト 15時まで</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button class="m_btn" onclick="openhint('r3')">
+                  カードキー
+                </button>
+                <div class="room_hint" id="hintRoom3">
+                  <div class="top_el_card-wrapper">
+                    <div
+                      class="top_el_card js_card is-active"
+                      onclick="flipCard()"
+                      id="cardFront"
+                      draggable="true"
+                      ondragstart="handleDragStart(event)"
+                    >
+                      Diamond Hotel
+                      <br />room key
+                    </div>
+                    <div
+                      class="top_el_card js_card"
+                      onclick="flipCard()"
+                      id="cardBack"
+                      draggable="true"
+                      ondragstart="handleDragStart(event)"
+                    >
+                      <p class="js_card_p">
+                        部屋番号：1206<br />お部屋の暗証番号は、誕生日です。<br /><br />※朝食は7時から9時までにお越しください。
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="room_q" id="room1"><p>鏡</p></div>
+            <div class="room_q" id="room2"><p>時計</p></div>
+            <div class="room_q" id="room3"><p>ベッド</p></div>
+            <div class="room_q" id="room4"><p>メモ帳</p></div>
 
+            <!-- <div class="door" id="finalDoor">🚪 最後の扉が現れた！</div> -->
+          </div>
+          <!-- モーダル -->
+          <div id="modal" class="l_modal is-disable">
+            <div class="l_modal_content">
+              <span class="m_close-btn" id="modalCloseBtn">&times;</span>
+              <p id="modalQuestion">謎の内容がここに表示されます</p>
+              <input
+                type="text"
+                id="answerRo"
+                class="m_answer"
+                placeholder="答えを入力"
+              />
+              <button class="m_btn" id="solveBtn" onclick="checkAnswer('Ro')">
+                回答
+              </button>
+              <p id="resultRo" class="m_question_p"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
     <footer class="l_footer">
       <div class="l_footer_box">
         <nav class="l_footer-nav">
@@ -100,7 +205,7 @@
             </li>
             <li class="l_footer-nav_item">
               <a href="room.html" class="l_footer-nav_link"
-                >部屋へ入った直後から</a
+                >部屋に入ってから</a
               >
             </li>
             <li class="l_footer-nav_item">
@@ -121,7 +226,7 @@
         </div>
       </div>
       <p class="l_footer-copyright">
-        <small class="l_footer-copyright_txt">D-ya</small>
+        <small class="l_footer-copyright_txt">Dの謎べya</small>
       </p>
     </footer>
   </body>
