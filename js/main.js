@@ -136,11 +136,11 @@ function start(n) {
 
 /*-------- カードキースキャン ---------*/
 function handleDragStart(event) {
-  event.dataTransfer.setData("text/plain", "cardKey");
+  event.dataTransfer.setData("application/my-app", "cardKey");
 }
 
 function handleDrop(event, n) {
-  const data = event.dataTransfer.getData("text/plain");
+  const data = event.dataTransfer.getData("application/my-app");
   if (data === "cardKey" && n === 1) {
     // カードリーダーの見た目変化
     const reader = document.getElementById("reader" + n);
