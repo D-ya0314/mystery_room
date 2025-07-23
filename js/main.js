@@ -198,7 +198,7 @@ const roomQuestions = {
   room3:
     "謎③：注意事項が書かれている。<br /><div class='room_q-room3'>1.チェックアウト時間を過ぎた場合、追加料金をいただきます。<br />2.晩御飯開始時刻は厳守でお願いします。<br />3.朝食は終了時刻に料理を片付けさせていただきます。</div><p>回答形式「〇〇 〇〇 〇」</p>",
   room4:
-    "謎④：メモ帳に何か書かれている。<div class='top_ch-memo'><p class='top_ch-memo_p'>メモ</p><p class='top_ch-memo_p'>「謎① 謎② 謎③」</p></div><p>回答形式「〇〇〇〇」</p>",
+    "謎④：メモ帳に何か書かれている。<div class='top_ch-memo'><p class='top_ch-memo_p'>Diamond Hotel メモ</p><p class='top_ch-memo_p'>謎① 謎② 謎③</p></div><p>回答形式「〇〇〇〇」</p>",
 };
 
 let roomId;
