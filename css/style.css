@@ -672,6 +672,8 @@ body {
 .js_card_p {
   margin-top: 0;
   transform: rotateY(180deg);
+  -webkit-user-select: none; /* iOS Safari */
+  user-select: none;
 }
 
 .top_el_card-wrapper {
