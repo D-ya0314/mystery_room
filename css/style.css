@@ -700,6 +700,8 @@ body {
   position: absolute;
   top: 0%;
   left: 10%;
+  -webkit-user-select: none; /* iOS Safari */
+  user-select: none;
 }
 
 /* door */
