@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+@font-face {
+  font-family: "Digital-7";
+  src: url("../fonts/digital-7/digital-7.ttf") format("truetype");
+}
+
 /* ---------- 変数 ---------- */
 :root {
   /* 色管理用の変数 */
@@ -810,7 +815,7 @@ body {
 }
 
 .room_q-room1 {
-  font-family: "Noto Sans JP", sans-serif;
+  font-family: "Digital-7", sans-serif;
 }
 
 .room_q-room3 {
