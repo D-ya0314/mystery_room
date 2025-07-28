@@ -136,12 +136,12 @@ function start(n) {
 
 /*-------- カードキースキャン ---------*/
 function handleDragStart(event) {
-  event.dataTransfer.setData("application/my-app", "cardKey");
-  event.dataTransfer.setData("text/plain", "");
+  event.dataTransfer.setData("text/plain", ""); // Safariの検索回避用（空文字）
+  event.dataTransfer.setData("custom/card-key", "cardKey"); // 値は独自キーで渡す
 }
 
 function handleDrop(event, n) {
-  const data = event.dataTransfer.getData("application/my-app");
+  const data = event.dataTransfer.getData("custom/card-key");
   // const data = event.dataTransfer.getData("text/plain");
   if (data === "cardKey" && n === 1) {
     // カードリーダーの見た目変化
