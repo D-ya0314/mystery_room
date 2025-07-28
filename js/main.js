@@ -136,13 +136,13 @@ function start(n) {
 
 /*-------- カードキースキャン ---------*/
 function handleDragStart(event) {
-  event.dataTransfer.setData("text/plain", ""); // Safariの検索回避用（空文字）
-  event.dataTransfer.setData("application/x-cardkey", "cardKey"); // 値は独自キーで渡す
+  event.dataTransfer.setData("text", "cardKey");
+  // event.dataTransfer.setData("application/x-cardkey", "cardKey");
 }
 
 function handleDrop(event, n) {
-  const data = event.dataTransfer.getData("application/x-cardkey");
-  // const data = event.dataTransfer.getData("text/plain");
+  // const data = event.dataTransfer.getData("application/x-cardkey");
+  const data = event.dataTransfer.getData("text/plain");
   if (data === "cardKey" && n === 1) {
     // カードリーダーの見た目変化
     const reader = document.getElementById("reader" + n);
