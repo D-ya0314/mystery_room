@@ -112,6 +112,19 @@ function enableScroll() {
   body.classList.remove("is-active");
 }
 
+// safariかを判別
+function isSafari() {
+  return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+}
+
+// Chromeかを判別
+function isChrome() {
+  return (
+    /chrome/i.test(navigator.userAgent) &&
+    !/edge|edg|opr|opera/i.test(navigator.userAgent)
+  );
+}
+
 /*---------- 幕開け ----------*/
 function start(n) {
   document.querySelector(".start").classList.add("is-disable");
@@ -140,13 +153,26 @@ function allowDrop(event) {
 }
 
 function handleDragStart(event) {
-  event.dataTransfer.setData("text", event.target.id);
-  // event.dataTransfer.setData("application/x-cardkey", "cardKey");
+  if (isSafari()) {
+    event.dataTransfer.setData("application/x-cardkey", event.target.id);
+  } else if (isChrome()) {
+    event.dataTransfer.setData("text", event.target.id);
+  } else {
+    event.dataTransfer.setData("text", event.target.id);
+  }
 }
 
 function handleDrop(event, n) {
+  let data = "";
+  if (isSafari()) {
+    data = event.dataTransfer.getData("application/x-cardkey");
+  } else if (isChrome()) {
+    data = event.dataTransfer.getData("text");
+  } else {
+    data = event.dataTransfer.getData("text");
+  }
   // const data = event.dataTransfer.getData("application/x-cardkey");
-  const data = event.dataTransfer.getData("text");
+  // const data = event.dataTransfer.getData("text");
   if ((data === "cardFront" || data === "cardBack") && n === 1) {
     // カードリーダーの見た目変化
     const reader = document.getElementById("reader" + n);
