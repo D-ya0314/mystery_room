@@ -135,15 +135,19 @@ function start(n) {
 }
 
 /*-------- カードキースキャン ---------*/
+function allowDrop(event) {
+  event.preventDefault();
+}
+
 function handleDragStart(event) {
-  event.dataTransfer.setData("text", "cardKey");
+  event.dataTransfer.setData("text", event.target.id);
   // event.dataTransfer.setData("application/x-cardkey", "cardKey");
 }
 
 function handleDrop(event, n) {
   // const data = event.dataTransfer.getData("application/x-cardkey");
-  const data = event.dataTransfer.getData("text/plain");
-  if (data === "cardKey" && n === 1) {
+  const data = event.dataTransfer.getData("text");
+  if ((data === "cardFront" || data === "cardBack") && n === 1) {
     // カードリーダーの見た目変化
     const reader = document.getElementById("reader" + n);
     const result = document.getElementById("resultEl");
@@ -160,7 +164,7 @@ function handleDrop(event, n) {
     });
   }
 
-  if (data === "cardKey" && n === 2) {
+  if ((data === "cardFront" || data === "cardBack") && n === 2) {
     // カードリーダーの見た目変化
     const reader = document.getElementById("reader" + n);
     const answer = document.getElementById("answerDo");
@@ -171,12 +175,6 @@ function handleDrop(event, n) {
     answer.classList.remove("is-disable");
     document.getElementById("scan").play();
     result.textContent = "これで解除コードが入力できるみたいだ";
-
-    // ボタン有効化
-    document.querySelectorAll(".top_el-btn").forEach((btn) => {
-      btn.disabled = false;
-      btn.classList.add("is-active");
-    });
   }
 }
 

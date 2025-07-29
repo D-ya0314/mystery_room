@@ -161,8 +161,8 @@
             <!-- カードリーダー -->
             <div
               id="reader1"
-              ondragover="event.preventDefault()"
               ondrop="handleDrop(event, 1)"
+              ondragover="allowDrop(event)"
               class="top_el_reader"
             >
               touch
@@ -227,8 +227,8 @@
             <!-- カードリーダー -->
             <div
               id="reader2"
-              ondragover="event.preventDefault()"
               ondrop="handleDrop(event, 2)"
+              ondragover="allowDrop(event)"
               class="top_el_reader"
             ></div>
           </div>
