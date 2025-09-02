@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>幻の部屋</title>
+    <meta name="description" content="幻の部屋" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- favicon/web-clip-icon -->
+    <link rel="icon" href="favicon.ico" type="image/ico" />
+    <link rel="icon" href="favicon.png" type="image/png" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="webclip.png" />
+
+    <!-- ogp共有時の表示 -->
+    <meta property="og:site_name" content="幻の部屋" />
+    <meta property="og:url" content="http://127.0.0.1:5500/src/index.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="幻の部屋" />
+    <meta property="og:description" content="幻の部屋" />
+    <meta property="og:image" content="URL" />
+    <meta property="og:locale" content="ja_JP" />
+
+    <meta property="fb:app_id" content="AppID" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@twitter_id" />
+    <meta name="twitter:description" content="幻の部屋" />
+    <meta name="twitter:image:src" content="URL" />
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Roboto:wght@400;700&family=Zen+Kurenaido&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- js -->
+    <script src="js/main.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+
+    <!-- audio -->
+    <audio id="buon" src="audio/buon.mp3" preload="auto"></audio>
+  </head>
+  <body class="js_body">
+    <header class="l_header js_header">
+      <h2 class="l_header_logo">
+        <a href="https://mysterytop.netlify.app/" class="l_header_link"
+          >Dの謎べya/幻の部屋</a
+        >
+      </h2>
+      <nav class="l_header-nav js_nav">
+        <ul class="l_header-nav_list">
+          <li class="l_header-nav_item">
+            <a href="index.html" class="l_header-nav_link">はじめから</a>
+          </li>
+          <li class="l_header-nav_item">
+            <a href="room.html" class="l_header-nav_link">部屋に入ってから</a>
+          </li>
+        </ul>
+      </nav>
+      <button class="m_hamburger js_hamburger">
+        <span class="m_hamburger-bar"></span>
+        <span class="m_hamburger-bar"></span>
+        <span class="m_hamburger-bar"></span>
+      </button>
+    </header>
+    <main class="top_main">
+      <section class="l_section">
+        <div class="l_contents l_container-sm">
+          <p class="m_section_title">チェックイン</p>
+          <div class="m_question_p">
+            <p class="m_p">26といえば、アルファベットの数！</p>
+            <p class="m_p">
+              暗証コード:「18 15 15 13」/26の「18 15 15
+              13」をアルファベットに置き換える。<br />18/26つまり26個のアルファベットのうち18個目はr、<br />15/26はo、13/26mとなり、答えは「room」
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="l_section">
+        <div class="l_contents l_container-sm">
+          <p class="m_section_title">エレベーター</p>
+          <div class="m_question_p">
+            <p class="m_p">
+              ルームキーをタッチしてからでないと、ボタンを押せないエレベーターあるよね...<br />
+              階数ボタンの下の黒い部分がタッチするところになり、薄く「touch」と書かれている。<br />
+              ルームキーをドラッグ＆ドロップすると、階数のボタンを押すことができる。
+            </p>
+            <p class="m_p">
+              自分の部屋の階数は、ルームキーをタップすると裏面になり<br />部屋番号「1206」が記載されているので、12階であることがわかる。
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="l_section">
+        <div class="l_contents l_container-sm">
+          <p class="m_section_title">ドアの解除</p>
+          <div class="m_question_p">
+            <p class="m_p">
+              またもやルームキーをタッチしてから、<br />さらに暗証番号を入力するセキュリティ高めのホテル...<br />（めんどくせぇホテルだ）
+            </p>
+            <p class="m_p">
+              ルームキーをドラッグ＆ドロップすると、番号が入力可能になる。
+            </p>
+            <p class="m_p">
+              ルームキーに暗証番号は、誕生日だと書かれている。<br />いつが誕生日？<br />
+              冒頭のセリフちゃんと読んだ？今日が誕生日らしいので、今日の日付で入力解除！
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="l_section">
+        <div class="l_contents l_container-sm">
+          <p class="m_section_title">部屋内：謎①鏡</p>
+          <div class="m_question_p">
+            <p class="m_p">
+              鏡に映る文字の謎。
+            </p>
+            <p class="m_p">
+              鏡に映ってるので、文字を反転させましょう。<br />鏡で映すとわかりやすい！？
+            </p>
+            <p class="m_p">
+              S(エス)が2(に)、I(アイ)は1(いち)、EI(イーアイ)は13(じゅうさん)となる。<br />順番も逆になるので、答えは「13 1 2」
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="l_section">
+        <div class="l_contents l_container-sm">
+          <p class="m_section_title">部屋内：謎②時計</p>
+          <div class="m_question_p">
+            <p class="m_p">
+              時計版だが、数字の位置がおかしい...逆さまになっているのだ。
+            </p>
+            <p class="m_p">
+              逆さにしてそのまま読むと、03:18なので答えは「03 18」...ではありません！<br />そんな夜中にチェックインしないでしょ？
+            </p>
+            <p class="m_p">
+              チェックイン時のメモに「チェックイン 15時~」とあったので、答えは「15 18」
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="l_section">
+        <div class="l_contents l_container-sm">
+          <p class="m_section_title">部屋内：謎③ベッド</p>
+          <div class="m_question_p">
+            <p class="m_p">
+              それぞれの注意事項には、時間について書かれている。<br />時間を調べて番号順に並べるだけ。
+            </p>
+            <p class="m_p">
+              １.チェックアウト時間は、チェックイン時のメモに記載されていた。<br />チェックアウト 15時まで：15
+              <br />（チェックインが15:00からでチェックアウトも15:00！？いつ掃除してんだよ...）
+            </p>
+            <p class="m_p">
+              ２.晩御飯開始時刻は、チェックイン時に受付嬢が言っていた。
+              <br />本日の晩御飯ですが、19時からです：19
+            </p>
+            <p class="m_p">
+              ３.朝食の終了時刻は、ルームキーの裏面に記載されている。
+              <br />※朝食は7時から9時まで：9
+            </p>
+            <p class="m_p">
+              答えは「15 19 9」
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="l_section">
+        <div class="l_contents l_container-sm">
+          <p class="m_section_title">部屋内：謎④メモ帳</p>
+          <div class="m_question_p">
+            <p class="m_p">
+              このメモ帳、、、チェックイン時のメモと同じ紙と字！！
+            </p>
+            <p class="m_p">
+              謎① 謎② 謎③の答えを並べると「13 1 2 15 18 15 19 9」となる。
+            </p>
+            <p class="m_p">
+              チェックイン時と同様に数字をアルファベットに変換すると、<br />
+              「m a b o r o s i」となる。
+            </p>
+            <p class="m_p">
+              回答形式が4文字なので、答えは「まぼろし」
+            </p>
+          </div>
+        </div>
+      </section>
+      <div class="l_annke">
+        <a
+          class="m_annke"
+          href="https://docs.google.com/forms/d/e/1FAIpQLScLOFuJcTyP18K2ntkZhsb6T6U_z7SG8fEB-FqcFZJmor_Esw/viewform?usp=dialog"
+          >アンケートの協力頼む🙇</a
+        >
+      </div>
+    </main>
+    <footer class="l_footer">
+      <div class="l_footer_box">
+        <nav class="l_footer-nav">
+          <ul class="l_footer-nav_list">
+            <li class="l_footer-nav_item">
+              <a href="index.html" class="l_footer-nav_link">はじめから</a>
+            </li>
+            <li class="l_footer-nav_item">
+              <a href="room.html" class="l_footer-nav_link">部屋に入ってから</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="l_footer_logo">
+          <a href="https://mysterytop.netlify.app/" class="l_footer_link">
+            <img
+              src="img/logo.png"
+              alt=""
+              class="l_footer_link-img"
+              width="500"
+              height="500"
+            />
+          </a>
+        </div>
+      </div>
+      <p class="l_footer-copyright">
+        <small class="l_footer-copyright_txt">Dの謎べya</small>
+      </p>
+    </footer>
+  </body>
+</html>
